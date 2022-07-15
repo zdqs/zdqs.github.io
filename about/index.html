@@ -64,11 +64,6 @@
 
 
 
-  
-<link rel="stylesheet" href="/css/diy/shubiao.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-
-
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -407,6 +402,49 @@
   
 </div>
 
+<footer class="mt-4">
+<font size="2" face="Georgia">
+<div class="text-center py-3">
+
+<div class="text-center py-1">   
+  <div>
+    <span>Copyright © 2020</span></a>
+    <a href="https://erenspace.cool/" target="_blank" rel="nofollow noopener">
+     <span>Eren‘s Spaceship</span></a>    <br>
+  </div>
+
+
+<div>
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("06/28/2022 18:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "🚀 for&nbsp"+dnum+"&nbspdays";  //此次自定义显示内容
+      document.getElementById("times").innerHTML = hnum + "&nbsphr&nbsp" + mnum + "&nbspmin&nbsp" + snum + "&nbspsec";
+  }  //此次自定义显示内容
+  setInterval("createtime()",250);
+  </script>
+</div>
   </footer>
 
   <!-- Scripts -->
@@ -497,14 +535,6 @@
   <script  src="/js/local-search.js" ></script>
 
 
-
-
-  
-<script src="/js/diy/timeDate.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/bynotes/texiao/source/js/timeDate.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/bynotes/texiao/source/js/qipao.js"></script>
 
 
 
