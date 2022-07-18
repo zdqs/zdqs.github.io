@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/4.jpg">
 <meta property="article:published_time" content="2022-07-18T03:13:07.000Z">
-<meta property="article:modified_time" content="2022-07-18T03:31:19.945Z">
+<meta property="article:modified_time" content="2022-07-18T03:36:52.720Z">
 <meta property="article:author" content="zdq">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
@@ -350,7 +350,10 @@
 <p>这个错误是安装完成detectron2之后会出现的，我当时安装完以为完事了，结果测试时报错了上面的错误。<br>在视频下方的评论中有提到，大体意思就是需要在输入搭建detectron2框架的命令行时，加入**–force**</p>
 <p>原先代码是：<code>python setup.py build develop</code></p>
 <p>应更改为：<code>python setup.py build --force develop</code></p>
-<p>但此时我这出现了新的错误:<code>error: command F:\\Anaconda3\\anaconda\\envs\\tensorflow2\\Library\\bin\\nvcc failed: No such file or directory</code></p>
+<p>但此时我这出现了新的错误:</p>
+<blockquote>
+<p>error: command F:\Anaconda3\anaconda\envs\tensorflow2\Library\bin\nvcc failed: No such file or directory</p>
+</blockquote>
 <p>找了好久才知道是我电脑之前安装过tensorflow，后面环境被我删了，CUDA路径没改，直接找不到路径了。<strong>（若是根据我上面所说的设置CUDA路径不会有这个问题）</strong></p>
 <p>修改完成后，还是报错：</p>
 <blockquote>
