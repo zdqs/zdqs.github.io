@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/4.jpg">
 <meta property="article:published_time" content="2022-07-18T03:13:07.000Z">
-<meta property="article:modified_time" content="2022-07-18T03:28:36.250Z">
+<meta property="article:modified_time" content="2022-07-18T03:30:20.169Z">
 <meta property="article:author" content="zdq">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
@@ -322,28 +322,29 @@
 <p>感谢up主的详细讲解，我在网上搜索了大量的关于detectron2框架的安装教程，然后再根据up主的详细讲解，最终完成了detectron2的安装。</p>
 <p>首先说一下自己遇到的问题：</p>
 <p>作为一名新手，第一次配深度学习框架的环境，着实有点艰难。<br>detectron2的框架搭建可分为三个部分，首先是NVIDIA驱动的安装以及cuda版本和cudnn版本的安装，这个网上的教程都一大堆。我最终下载下来这三个文件</p>
-<p><img src="https://img-blog.csdnimg.cn/20210628161152152.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20210628161215266.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210628161152152.png" srcset="/img/loading.gif" lazyload><img src="https://img-blog.csdnimg.cn/20210628161215266.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
 <p>依次安装驱动、cuda、然后将cudnn压缩包解压，并将cudnn解压下来的三个文件夹复制到</p>
 <blockquote>
 <p>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1</p>
 </blockquote>
 <p>然后将环境路径设置好</p>
 <p>最终呈现的效果就是打开cmd，输入 <strong>nvcc -V</strong>  可以出现以下图片：</p>
-<p><img src="https://img-blog.csdnimg.cn/20210628161531373.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NDMwMTA4,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210628161531373.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NDMwMTA4,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload></p>
 <p>如图所示，我用的是<strong>cuda10.1.243</strong></p>
 <p>这个安装完成后，就可以在anaconda中创建环境，并且按照视频步骤，一步一步安装了。（<strong>关于detectron2安装资源，我是通过up主的公众号获取的</strong>）</p>
 <p>首先需要安装就是pytorch，我这里使用的是up主所说的版本，pytoch&#x3D;1.4,cuda&#x3D;10.1，这个在官网中都有，不过下载起来可能比较慢，（我当时确实下载了很久，失败了很多次才下载完成。）</p>
 <p>然后就是安装所需的依赖库了，如cython、fvcore、matplotlib等，</p>
 <p><strong>这里推荐一个pip源，下载速度飞快：-i<a target="_blank" rel="noopener" href="http://pypi.douban.com/simple">http://pypi.douban.com/simple</a> –trusted-host pypi.douban.com</strong></p>
 <p>接着就是cocotools安装，这个也不多赘述，按照步骤安装，一般不会出问题。</p>
-<p>然后修改up主所说的几个地方，一直到最后detectron2的安装<br>最终安装完成，可以用conda list看到<br><img src="https://img-blog.csdnimg.cn/20210628162248629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NDMwMTA4,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>然后修改up主所说的几个地方，一直到最后detectron2的安装<br>最终安装完成，可以用conda list看到<br><img src="https://img-blog.csdnimg.cn/20210628162248629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NDMwMTA4,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload></p>
 <p>detectron2已经安装完成。</p>
 <p>然后进入模型所在文件夹，对框架进行测试，输入以下命令：</p>
 <blockquote>
 <p>python demo&#x2F;demo.py –config-file configs&#x2F;COCO-InstanceSegmentation&#x2F;mask_rcnn_R_50_FPN_1x.yaml –input 1.jpg –opts MODEL.WEIGHTS model_final_a54504.pkl</p>
 </blockquote>
-<p>如下所示：<br><img src="https://img-blog.csdnimg.cn/20210628162833132.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20210628162848163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NDMwMTA4,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"><br>这说明，框架搭建成功！</p>
+<p>如下所示：<br><img src="https://img-blog.csdnimg.cn/20210628162833132.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://img-blog.csdnimg.cn/20210628162848163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NDMwMTA4,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="最终效果图"></p>
+<p>这说明，框架搭建成功！</p>
 <p><strong>我遇到的问题：</strong></p>
 <p>1、关于<code>CUDA erro: no ernel image is available for excution on the device </code>的错误。</p>
 <p>这个错误是安装完成detectron2之后会出现的，我当时安装完以为完事了，结果测试时报错了上面的错误。<br>在视频下方的评论中有提到，大体意思就是需要在输入搭建detectron2框架的命令行时，加入**–force**</p>
@@ -360,7 +361,7 @@
 <p><strong>原因：</strong>在Anaconda中，我的环境安装的为pytorch&#x3D;1.4，cudatoolkit为10.1，但其实他的具体版本为<strong>10.1.243</strong></p>
 <p>而在电脑中，我没有重新安装CUDA和cudnn前，cuda版本为10.1.105，</p>
 <p>当时的我没有想太多，没想到就是后面这个版本号没有对应上，最终安装没成功，果然是细节决定成败。</p>
-<p><img src="https://img-blog.csdnimg.cn/20210628164830543.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210628164830543.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
