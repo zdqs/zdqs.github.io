@@ -1,0 +1,860 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="zdq">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="C++项目第 1 章：Linux系统编程入门5、makefile1、什么是 Makefile  一个工程中的源文件不计其数，其按照类型、功能、模块放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就像一个 Shell脚本一样，也可以执行操作系统的命令。  Makefi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++项目第一章笔记3">
+<meta property="og:url" content="http://example.com/2022/07/19/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B03/index.html">
+<meta property="og:site_name" content="zzZdqs">
+<meta property="og:description" content="C++项目第 1 章：Linux系统编程入门5、makefile1、什么是 Makefile  一个工程中的源文件不计其数，其按照类型、功能、模块放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就像一个 Shell脚本一样，也可以执行操作系统的命令。  Makefi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/2.jpg">
+<meta property="article:published_time" content="2022-07-19T12:22:03.000Z">
+<meta property="article:modified_time" content="2022-07-19T13:41:56.000Z">
+<meta property="article:author" content="zdq">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Linux编程">
+<meta property="article:tag" content="GDB调试">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/2.jpg">
+  
+  
+  
+  <title>C++项目第一章笔记3 - zzZdqs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/gradient.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"L83mEVUQrzoYDnkfINIhTASR-MdYXbMMI","app_key":"gdcWtAs0LWTC5IVkz986eUDJ","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>zzZdqs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/776026.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="C++项目第一章笔记3"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-19 20:22" pubdate>
+          2022年7月19日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">C++项目第一章笔记3</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="C-项目第-1-章：Linux系统编程入门"><a href="#C-项目第-1-章：Linux系统编程入门" class="headerlink" title="C++项目第 1 章：Linux系统编程入门"></a>C++项目第 1 章：Linux系统编程入门</h1><h2 id="5、makefile"><a href="#5、makefile" class="headerlink" title="5、makefile"></a>5、makefile</h2><p><strong>1、什么是 Makefile</strong></p>
+<ul>
+<li><p>一个工程中的源文件不计其数，其按照类型、功能、模块放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就像一个 Shell脚本一样，也可以执行操作系统的命令。</p>
+</li>
+<li><p>Makefile 带来的好处就是“<strong>自动化编译</strong>”，一旦写好，只需一个make指令，整个工程完全自动编译，极大提高了软件开发的效率。</p>
+</li>
+</ul>
+<p><strong>2、Makefile的文件命名和规则</strong></p>
+<ul>
+<li><p>文件命名</p>
+<ul>
+<li>makefile 或者 Makefile</li>
+</ul>
+</li>
+<li><p>Makefile 规则</p>
+<ul>
+<li><p>一个 Makefile 文件中可以由一个或者多个规则</p>
+<p>  <img src="https://s2.loli.net/2022/07/19/Hw8GNt4qYBmD3cR.png" srcset="/img/loading.gif" lazyload alt="1.jpg"></p>
+<ul>
+<li><p>目标： 最终要生成的文件(伪目标除外)</p>
+</li>
+<li><p>依赖：生成目标所需要的文件或是目标</p>
+</li>
+<li><p>命令：通过执行命令对依赖操作生成目标(命令前进行Tab缩进)</p>
+</li>
+</ul>
+</li>
+<li><p>Makefile 中的其他规则一般是为第一条规则服务。</p>
+<ul>
+<li><p>若 Makefile中的第一条规则中的先决条件不存在，它会顺序往下找其他规则，是否能够生成第一条规则所需要的依赖。</p>
+</li>
+<li><p>使用 Makefile 编译会帮助我们自动检查文件是否发生修改，再决定是否需要编译。会比较目标与依赖文件的时间</p>
+<ul>
+<li><p>如果依赖的时间比目标时间晚，需要重新生成目标</p>
+</li>
+<li><p>如果依赖时间比目标时间早，目标不需要更新，对应规则中的命令不需要被执行。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">app:sub<span class="hljs-selector-class">.c</span> add<span class="hljs-selector-class">.c</span> mult<span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span>    <br> <br>	gcc sub<span class="hljs-selector-class">.c</span> add<span class="hljs-selector-class">.c</span> mult<span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> -o app<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>3、Makefile 的变量</strong></p>
+<ul>
+<li><p>自定义变量</p>
+<ul>
+<li>变量名&#x3D;变量值   var &#x3D; hello   $(var)</li>
+</ul>
+</li>
+<li><p>预定义变量</p>
+<ul>
+<li><p>AR：归档维护程序的名称，默认值为 ar</p>
+</li>
+<li><p>CC：C编译器的名称，默认值为cc</p>
+</li>
+<li><p>CXX：C++编译器的名称，默认值为 g++</p>
+</li>
+<li><p>$@：目标的完成名称</p>
+</li>
+<li><p>$&lt; ：第一个依赖文件的名称</p>
+</li>
+<li><p>$&lt; ：所有的依赖文件</p>
+</li>
+</ul>
+</li>
+<li><p>获取变量的值</p>
+<ul>
+<li>$（变量名）</li>
+</ul>
+</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus">app:<span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.c</span><br>	<br>	gcc -c <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.c</span><br><br>#自动变量只能在规则的命令中使用<br><br>app:<span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.c</span><br>	$(CC) -c $^ -o $@<br></code></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#模式匹配例子</span><br><br><span class="hljs-comment">#定义变量</span><br>src=sub.o add.o mult.o div.o main.o<br>target=app<br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(src)</span><br>	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(src)</span> -o <span class="hljs-variable">$(target)</span><br><br>%.o%.c<br>	<span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="6、GDB调试"><a href="#6、GDB调试" class="headerlink" title="6、GDB调试"></a>6、GDB调试</h2><p><strong>1、什么是GDB</strong></p>
+<ul>
+<li><p>GDB是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境， GDB 是 Linux 和许多类 Unix 系统的标准开发环境。</p>
+</li>
+<li><p>一般来说，GDB主要由四个方面的功能：</p>
+<ul>
+<li><p>启动程序，可以按照自定义的要求随心所欲的运行程序</p>
+</li>
+<li><p>可让被调试的程序在所指定的调置的断点处停住（断点可以是条件表达式）</p>
+</li>
+<li><p>当程序被停住时，可以检查此时程序中所发生的事</p>
+</li>
+<li><p>可以改变程序，将一个BUG产生的影响修正从而测试其他BUG</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>gcc -g -Wall program.c -o program</strong></p>
+<ul>
+<li><p>-g 选项的作用是在可执行文件中加入源代码的信息，比如可执行文件中第几条机器指令对应源代码的第几行，但并不是把整个源文件嵌入到可执行文件中，所以在调试时必须保证gdb 能找到源文件</p>
+<ul>
+<li><p>list指令，查看代码。在gdb打开的文件中，用list查看代码。可以指定行数，指定函数名，指定文件名等操作。</p>
+</li>
+<li><p>break指令，设置断点。break 行号&#x2F;函数名&#x2F;文件名，行号&#x2F;文件名，函数名</p>
+<ul>
+<li>还可以设置条件断点：比如在for循环中，设置断点停在循环变量等于某个值时。</li>
+</ul>
+</li>
+<li><p>info指令，查看断点。</p>
+</li>
+<li><p>delete指令，删除断点。删除的是断点编号。</p>
+</li>
+<li><p>disable指令，失效断点。失效的是断点编号。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>指令合集：</strong></p>
+<p><img src="https://s2.loli.net/2022/07/19/4aGFKqmOW7CVP9d.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://s2.loli.net/2022/07/19/3w5mUSAoXLKjOpG.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://s2.loli.net/2022/07/19/FrA3SViI1e9Yyqo.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/C/" class="category-chain-item">C++</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/">#C++</a>
+      
+        <a href="/tags/Linux%E7%BC%96%E7%A8%8B/">#Linux编程</a>
+      
+        <a href="/tags/GDB%E8%B0%83%E8%AF%95/">#GDB调试</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>C++项目第一章笔记3</div>
+      <div>http://example.com/2022/07/19/C-项目第一章笔记3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>zdq</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月19日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/07/20/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B04/" title="C++项目第一章笔记4">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">C++项目第一章笔记4</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/18/win10%E7%B3%BB%E7%BB%9F%E4%B8%8BDetectron2%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E7%9A%84%E7%AC%94%E8%AE%B0/" title="win10系统下Detectron2框架搭建的笔记">
+                        <span class="hidden-mobile">win10系统下Detectron2框架搭建的笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+<footer class="mt-4">
+<font size="2" face="Georgia">
+<div class="text-center py-3">
+
+<div class="text-center py-1">   
+  <div>
+    <span>Copyright © 2022</span></a>
+    <a href="https://erenspace.cool/" target="_blank" rel="nofollow noopener">
+     <span>zzZdqs‘s Spaceship</span></a>    <br>
+  </div>
+
+
+<div>
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("06/28/2022 18:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "🚀 for&nbsp"+dnum+"&nbspdays";  //此次自定义显示内容
+      document.getElementById("times").innerHTML = hnum + "&nbsphr&nbsp" + mnum + "&nbspmin&nbsp" + snum + "&nbspsec";
+  }  //此次自定义显示内容
+  setInterval("createtime()",250);
+  </script>
+</div>
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicLine.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/snowflake.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/containsWord.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

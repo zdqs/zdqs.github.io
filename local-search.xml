@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2022/07/28/hello-world/"/>
+    <url>/2022/07/28/hello-world/</url>
+    
+    <content type="html"><![CDATA[<h1 id="你好，这是zzZdqs的博客"><a href="#你好，这是zzZdqs的博客" class="headerlink" title="你好，这是zzZdqs的博客"></a>你好，这是zzZdqs的博客</h1>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++项目第一章笔记4</title>
+    <link href="/2022/07/20/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B04/"/>
+    <url>/2022/07/20/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B04/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C-项目第-1-章：Linux系统编程入门"><a href="#C-项目第-1-章：Linux系统编程入门" class="headerlink" title="C++项目第 1 章：Linux系统编程入门"></a>C++项目第 1 章：Linux系统编程入门</h1><h2 id="5、标准C-I-x2F-O-和-Linux-系统-I-x2F-O-函数的比较"><a href="#5、标准C-I-x2F-O-和-Linux-系统-I-x2F-O-函数的比较" class="headerlink" title="5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较"></a>5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较</h2><p>C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。</p><p>若调用标准C库的IO函数，其实会先去调用Linux下的IO，Linux中的IO函数更加偏底层，低级；标准C库的IO更加高级，效率更高，带有缓冲区。</p><p>C语言的I&#x2F;O函数是对Linux的I&#x2F;O进行了一次包装，最大的差异，在于C语言设置了一个缓冲区，每次调用函数写数据时，都是先写入到缓冲区中，只有缓冲区满或者强制刷新缓冲区时，才会把数据写入到磁盘&#x2F;显示器等</p><p><img src="https://s2.loli.net/2022/07/20/N3smMGey8kqo7EC.png"></p><p><img src="https://s2.loli.net/2022/07/20/bg2SP7nmxtKRlJy.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>Linux编程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++项目第一章笔记3</title>
+    <link href="/2022/07/19/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B03/"/>
+    <url>/2022/07/19/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B03/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C-项目第-1-章：Linux系统编程入门"><a href="#C-项目第-1-章：Linux系统编程入门" class="headerlink" title="C++项目第 1 章：Linux系统编程入门"></a>C++项目第 1 章：Linux系统编程入门</h1><h2 id="5、makefile"><a href="#5、makefile" class="headerlink" title="5、makefile"></a>5、makefile</h2><p><strong>1、什么是 Makefile</strong></p><ul><li><p>一个工程中的源文件不计其数，其按照类型、功能、模块放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就像一个 Shell脚本一样，也可以执行操作系统的命令。</p></li><li><p>Makefile 带来的好处就是“<strong>自动化编译</strong>”，一旦写好，只需一个make指令，整个工程完全自动编译，极大提高了软件开发的效率。</p></li></ul><p><strong>2、Makefile的文件命名和规则</strong></p><ul><li><p>文件命名</p><ul><li>makefile 或者 Makefile</li></ul></li><li><p>Makefile 规则</p><ul><li><p>一个 Makefile 文件中可以由一个或者多个规则</p><p>  <img src="https://s2.loli.net/2022/07/19/Hw8GNt4qYBmD3cR.png" alt="1.jpg"></p><ul><li><p>目标： 最终要生成的文件(伪目标除外)</p></li><li><p>依赖：生成目标所需要的文件或是目标</p></li><li><p>命令：通过执行命令对依赖操作生成目标(命令前进行Tab缩进)</p></li></ul></li><li><p>Makefile 中的其他规则一般是为第一条规则服务。</p><ul><li><p>若 Makefile中的第一条规则中的先决条件不存在，它会顺序往下找其他规则，是否能够生成第一条规则所需要的依赖。</p></li><li><p>使用 Makefile 编译会帮助我们自动检查文件是否发生修改，再决定是否需要编译。会比较目标与依赖文件的时间</p><ul><li><p>如果依赖的时间比目标时间晚，需要重新生成目标</p></li><li><p>如果依赖时间比目标时间早，目标不需要更新，对应规则中的命令不需要被执行。</p></li></ul></li></ul></li></ul></li></ul><p>例如：</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">app:sub<span class="hljs-selector-class">.c</span> add<span class="hljs-selector-class">.c</span> mult<span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span>    <br> <br>gcc sub<span class="hljs-selector-class">.c</span> add<span class="hljs-selector-class">.c</span> mult<span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> -o app<br><br></code></pre></td></tr></table></figure><p><strong>3、Makefile 的变量</strong></p><ul><li><p>自定义变量</p><ul><li>变量名&#x3D;变量值   var &#x3D; hello   $(var)</li></ul></li><li><p>预定义变量</p><ul><li><p>AR：归档维护程序的名称，默认值为 ar</p></li><li><p>CC：C编译器的名称，默认值为cc</p></li><li><p>CXX：C++编译器的名称，默认值为 g++</p></li><li><p>$@：目标的完成名称</p></li><li><p>$&lt; ：第一个依赖文件的名称</p></li><li><p>$&lt; ：所有的依赖文件</p></li></ul></li><li><p>获取变量的值</p><ul><li>$（变量名）</li></ul></li></ul><p>例如：</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus">app:<span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.c</span><br><br>gcc -c <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.c</span><br><br>#自动变量只能在规则的命令中使用<br><br>app:<span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.c</span><br>$(CC) -c $^ -o $@<br></code></pre></td></tr></table></figure><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#模式匹配例子</span><br><br><span class="hljs-comment">#定义变量</span><br>src=sub.o add.o mult.o div.o main.o<br>target=app<br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(src)</span><br><span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(src)</span> -o <span class="hljs-variable">$(target)</span><br><br>%.o%.c<br><span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></table></figure><h2 id="6、GDB调试"><a href="#6、GDB调试" class="headerlink" title="6、GDB调试"></a>6、GDB调试</h2><p><strong>1、什么是GDB</strong></p><ul><li><p>GDB是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境， GDB 是 Linux 和许多类 Unix 系统的标准开发环境。</p></li><li><p>一般来说，GDB主要由四个方面的功能：</p><ul><li><p>启动程序，可以按照自定义的要求随心所欲的运行程序</p></li><li><p>可让被调试的程序在所指定的调置的断点处停住（断点可以是条件表达式）</p></li><li><p>当程序被停住时，可以检查此时程序中所发生的事</p></li><li><p>可以改变程序，将一个BUG产生的影响修正从而测试其他BUG</p></li></ul></li></ul><p><strong>gcc -g -Wall program.c -o program</strong></p><ul><li><p>-g 选项的作用是在可执行文件中加入源代码的信息，比如可执行文件中第几条机器指令对应源代码的第几行，但并不是把整个源文件嵌入到可执行文件中，所以在调试时必须保证gdb 能找到源文件</p><ul><li><p>list指令，查看代码。在gdb打开的文件中，用list查看代码。可以指定行数，指定函数名，指定文件名等操作。</p></li><li><p>break指令，设置断点。break 行号&#x2F;函数名&#x2F;文件名，行号&#x2F;文件名，函数名</p><ul><li>还可以设置条件断点：比如在for循环中，设置断点停在循环变量等于某个值时。</li></ul></li><li><p>info指令，查看断点。</p></li><li><p>delete指令，删除断点。删除的是断点编号。</p></li><li><p>disable指令，失效断点。失效的是断点编号。</p></li></ul></li></ul><p><strong>指令合集：</strong></p><p><img src="https://s2.loli.net/2022/07/19/4aGFKqmOW7CVP9d.png"></p><p><img src="https://s2.loli.net/2022/07/19/3w5mUSAoXLKjOpG.png"></p><p><img src="https://s2.loli.net/2022/07/19/FrA3SViI1e9Yyqo.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>Linux编程</tag>
+      
+      <tag>GDB调试</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>win10系统下Detectron2框架搭建的笔记</title>
+    <link href="/2022/07/18/win10%E7%B3%BB%E7%BB%9F%E4%B8%8BDetectron2%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E7%9A%84%E7%AC%94%E8%AE%B0/"/>
+    <url>/2022/07/18/win10%E7%B3%BB%E7%BB%9F%E4%B8%8BDetectron2%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E7%9A%84%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<p><strong>关于Detectron2框架搭建的一些心得</strong></p><p>参考链接：<a href="https://www.bilibili.com/video/BV1jZ4y1W7Nb" title="Detectron2框架搭建">https://www.bilibili.com/video/BV1jZ4y1W7Nb</a></p><p>感谢up主的详细讲解，我在网上搜索了大量的关于detectron2框架的安装教程，然后再根据up主的详细讲解，最终完成了detectron2的安装。</p><p>首先说一下自己遇到的问题：</p><p>作为一名新手，第一次配深度学习框架的环境，着实有点艰难。<br>detectron2的框架搭建可分为三个部分，首先是NVIDIA驱动的安装以及cuda版本和cudnn版本的安装，这个网上的教程都一大堆。我最终下载下来这三个文件</p><p><img src="https://img-blog.csdnimg.cn/20210628161152152.png"><img src="https://img-blog.csdnimg.cn/20210628161215266.png"></p><p>依次安装驱动、cuda、然后将cudnn压缩包解压，并将cudnn解压下来的三个文件夹复制到</p><blockquote><p>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1</p></blockquote><p>然后将环境路径设置好</p><p>最终呈现的效果就是打开cmd，输入 <strong>nvcc -V</strong>  可以出现以下图片：</p><p><img src="https://img-blog.csdnimg.cn/20210628161531373.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NDMwMTA4,size_16,color_FFFFFF,t_70"></p><p>如图所示，我用的是<strong>cuda10.1.243</strong></p><p>这个安装完成后，就可以在anaconda中创建环境，并且按照视频步骤，一步一步安装了。（<strong>关于detectron2安装资源，我是通过up主的公众号获取的</strong>）</p><p>首先需要安装就是pytorch，我这里使用的是up主所说的版本，pytoch&#x3D;1.4,cuda&#x3D;10.1，这个在官网中都有，不过下载起来可能比较慢，（我当时确实下载了很久，失败了很多次才下载完成。）</p><p>然后就是安装所需的依赖库了，如cython、fvcore、matplotlib等，</p><p><strong>这里推荐一个pip源，下载速度飞快：-i<a href="http://pypi.douban.com/simple">http://pypi.douban.com/simple</a> –trusted-host pypi.douban.com</strong></p><p>接着就是cocotools安装，这个也不多赘述，按照步骤安装，一般不会出问题。</p><p>然后修改up主所说的几个地方，一直到最后detectron2的安装<br>最终安装完成，可以用conda list看到<br><img src="https://img-blog.csdnimg.cn/20210628162248629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NDMwMTA4,size_16,color_FFFFFF,t_70"></p><p>detectron2已经安装完成。</p><p>然后进入模型所在文件夹，对框架进行测试，输入以下命令：</p><blockquote><p>python demo&#x2F;demo.py –config-file configs&#x2F;COCO-InstanceSegmentation&#x2F;mask_rcnn_R_50_FPN_1x.yaml –input 1.jpg –opts MODEL.WEIGHTS model_final_a54504.pkl</p></blockquote><p>如下所示：<br><img src="https://img-blog.csdnimg.cn/20210628162833132.png"></p><p><img src="https://img-blog.csdnimg.cn/20210628162848163.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3NDMwMTA4,size_16,color_FFFFFF,t_70" alt="最终效果图"></p><p>这说明，框架搭建成功！</p><p><strong>我遇到的问题：</strong></p><p>1、关于<code>CUDA erro: no ernel image is available for excution on the device </code>的错误。</p><p>这个错误是安装完成detectron2之后会出现的，我当时安装完以为完事了，结果测试时报错了上面的错误。<br>在视频下方的评论中有提到，大体意思就是需要在输入搭建detectron2框架的命令行时，加入**–force**</p><p>原先代码是：<code>python setup.py build develop</code></p><p>应更改为：<code>python setup.py build --force develop</code></p><p>但此时我这出现了新的错误:</p><blockquote><p>error: command F:\Anaconda3\anaconda\envs\tensorflow2\Library\bin\nvcc failed: No such file or directory</p></blockquote><p>找了好久才知道是我电脑之前安装过tensorflow，后面环境被我删了，CUDA路径没改，直接找不到路径了。<strong>（若是根据我上面所说的设置CUDA路径不会有这个问题）</strong></p><p>修改完成后，还是报错：</p><blockquote><p>C:&#x2F;Program Files (x86)&#x2F;Microsoft Visual Studio&#x2F;2019&#x2F;Community&#x2F;VC&#x2F;Tools&#x2F;MSVC&#x2F;14.29.30037&#x2F;include\yvals_core.h(531): fatal error C1189: #error:  STL1002: Unexpected compiler version, expected CUDA 10.1 Update 2 or newer.</p></blockquote><p>当时也问了UP主，说是CUDA没安装好。</p><p>我一直以为是vs版本的原因，之后痛定思痛，重新将CUDA和cudnn安装了一遍，就是上述的安装过程。在进行测试后，运行成功。</p><p><strong>原因：</strong>在Anaconda中，我的环境安装的为pytorch&#x3D;1.4，cudatoolkit为10.1，但其实他的具体版本为<strong>10.1.243</strong></p><p>而在电脑中，我没有重新安装CUDA和cudnn前，cuda版本为10.1.105，</p><p>当时的我没有想太多，没想到就是后面这个版本号没有对应上，最终安装没成功，果然是细节决定成败。</p><p><img src="https://img-blog.csdnimg.cn/20210628164830543.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>环境配置</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>环境配置</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++项目第一章笔记2</title>
+    <link href="/2022/07/11/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B02/"/>
+    <url>/2022/07/11/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B02/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C-项目第-1-章：Linux系统编程入门"><a href="#C-项目第-1-章：Linux系统编程入门" class="headerlink" title="C++项目第 1 章：Linux系统编程入门"></a>C++项目第 1 章：Linux系统编程入门</h1><h2 id="2、静态库制作及使用"><a href="#2、静态库制作及使用" class="headerlink" title="2、静态库制作及使用"></a>2、静态库制作及使用</h2><p>静态库：指的是在程序的链接阶段被复制到程序中。</p><p><strong>写静态库的好处：</strong></p><ul><li><p>代码保密；C++反编译解密程度比较低</p></li><li><p>方便部署和分发</p></li></ul><p><strong>静态库的制作方法：</strong></p><ul><li><p>命名规则：libxxx.a</p></li><li><p>gcc -c(编译但不链接)获得 .o 文件，然后将 .o 文件使用程序 ar 文件打包</p></li><li><p>命令：ar rcs libxxx.a xx.o xx.o，从而生成libxxx.a文件</p></li></ul><p><strong>静态库的使用方法：</strong></p><ul><li>在要编译的文件中，使用 -L 和 -l 以及 -I 指令来搜索对应文件夹下的库的路径和名称，正确编译文件。</li></ul><h2 id="3、动态库制作及使用"><a href="#3、动态库制作及使用" class="headerlink" title="3、动态库制作及使用"></a>3、动态库制作及使用</h2><p>动态库：在程序运行阶段载入内存，动态链接到程序中，并不占用资源，只有用到某个库的时候才会去加载。</p><p><strong>动态库的制作方法：</strong></p><ul><li><p>命名规则：</p><ul><li><p>在 linux 中为 libxxx.so，是一个可执行的文件</p><ul><li><p>lib：前缀（固定）</p></li><li><p>xxx：库的名字，自己起</p></li><li><p>.so：后缀（固定）</p></li></ul></li><li><p>在Windows中为：libxxx.dll</p></li></ul></li><li><p>制作过程：</p><ul><li><p>gcc得到 .o 文件，要加关键字 -fpic 得到与位置无关的代码</p><ul><li><p>gcc -c -fpic a.c b.c</p></li><li><p>再使用gcc由 .o 文件得到动态库</p><ul><li>gcc -shared a.o b.o -o libxxx.so</li></ul></li></ul></li></ul></li></ul><p><strong>动态库加载失败的原因：</strong></p><p>动态库是再linux下的一个可执行文件，只有在程序运行时，动态库会加载到内存中，动态库的装载在程序中相较于静态库，整个执行的过程更加复杂了，因此稍不注意，就容易加载失败，失败原因如下：</p><ul><li><p>动态库和头文件都需要打包给用户</p></li><li><p>编译时需要指明动态库的绝对路径</p></li><li><p>动态库没有写入内存中，程序运行时，找不到动态库</p></li><li><p>动态载入器来获取绝对路径，对于elf格式的可执行程序，由 ld-linux.so来完成，搜索先后路径如下：</p><ul><li>DT_RPATH段——&gt;环境变量 LD_LIBRARY_PATH——&gt;&#x2F;etc&#x2F;ld.so.cache文件列表——&gt;&#x2F;lib&#x2F;, &#x2F;user&#x2F;lib。</li></ul></li></ul><p><strong>找不到动态库的解决办法：</strong></p><ul><li><p>在终端中，将编译好的动态库的路径，直接加入到系统的LD-LIBRARY_PATH环境变量中，即可解决</p><ul><li><p>命令为：export LD_LIBRARY_PATH&#x3D;$LD_LIBRARY_PATH:xxx&#x2F;xxx&#x2F;xx</p></li><li><p>缺点是，该操作为临时性的，重新打开终端即失效。</p><ul><li><p>永久用户级配置：配置 .bashrc 文件，然后直接插入配置LD_LIBRARY_PATH的动态库路径。</p><ul><li>配置完成后，在终端home中输入：. .bashrc&#x2F;source .bashrc</li></ul></li><li><p>永久系统级别的配置：在etc&#x2F;profile目录下配置LD_LIBRARY_PATH的动态库路径。</p><ul><li>配置完成后，在终端home中输入：source &#x2F;etc&#x2F;profile</li></ul></li></ul></li></ul></li><li><p>间接修改&#x2F;etc&#x2F;ld.so.cache文件列表（无权限直接打开），找&#x2F;etc&#x2F;ld.so.config文件，直接加入动态库的路径，并使用命令：sudo ldconfig更新。</p></li></ul><h2 id="4、静态库和动态库的对比"><a href="#4、静态库和动态库的对比" class="headerlink" title="4、静态库和动态库的对比"></a>4、静态库和动态库的对比</h2><p><strong>静态库的制作过程：</strong></p><p><img src="https://s2.loli.net/2022/07/13/JcWn9Mahuk8T3bL.png" alt="2.png"></p><p><strong>动态库的制作过程：</strong></p><p><img src="https://s2.loli.net/2022/07/13/fbyS3Ap7VxJBma9.png" alt="3.png"></p><p><strong>静态库的优缺点：</strong></p><ul><li><p>优点：</p><ul><li><p>静态库被打包到应用程序中加载速度快</p></li><li><p>发布程序无需提供静态库，移植方便</p></li></ul></li><li><p>缺点：</p><ul><li><p>消耗系统资源，浪费内存</p></li><li><p>更新、部署、发布麻烦，需重新编译等。</p></li></ul></li></ul><p><strong>动态库的优缺点：</strong></p><ul><li><p>优点：</p><ul><li><p>可以实现进程间资源共享</p></li><li><p>更新、部署、发布简单</p></li><li><p>可以控制何时加载动态库</p></li></ul></li><li><p>缺点：</p><ul><li><p>加载速度比静态库慢</p></li><li><p>发布程序时需要提供依赖的动态库</p></li></ul></li></ul><p>总的来说，</p><p><strong>从产品角度出发</strong>，发布的算法库或功能库尽量使用动态库，这样方便更新和升级，不必重新编译整个可执行文件。</p><p><strong>从函数库集成的角度</strong>，若要将发布的所有子库（不止一个）集成为一个动态库向外提供接口，那么就需要将所有子库编译为静态库，这样所有子库就可以全部编译进目标动态库中，由最终的一个集成库向外提供功能。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>Linux编程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++项目第一章笔记1</title>
+    <link href="/2022/07/11/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B0/"/>
+    <url>/2022/07/11/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C-项目第-1-章：Linux系统编程入门"><a href="#C-项目第-1-章：Linux系统编程入门" class="headerlink" title="C++项目第 1 章：Linux系统编程入门"></a>C++项目第 1 章：Linux系统编程入门</h1><h2 id="1、环境配置"><a href="#1、环境配置" class="headerlink" title="1、环境配置"></a>1、环境配置</h2><ul><li>Linux虚拟机<ul><li><p>安装VMware Tools，可以在主机和虚拟机之间拖拽文件</p></li><li><p>XSHELL（用于远程登录Linux系统）、XFTP（用于远程Linux和Windows文件的传输）</p></li><li><p>vscode（可在vscode配置rsa公钥，免密码登录，进行主要的代码编写）</p></li></ul></li></ul><p>问题1：无法连接linux，可以在网络适配器设置当中，将</p><p><em>VMware Network Adapter VMnet1</em>和<em>VMware Network Adapter VMnet8</em>禁用再重启</p><ul><li>GCC安装及主要使用方法<ul><li><p>GCC编译流程<br>  <img src="https://s2.loli.net/2022/07/11/qGVbsg9Hd2eSx4N.png" alt="1.png"></p></li><li><p>GCC各个命令的作用</p></li></ul></li></ul><table><thead><tr><th align="center">命令</th><th align="center">作用介绍</th></tr></thead><tbody><tr><td align="center">-E</td><td align="center">预处理指定的源文件，不进行编译</td></tr><tr><td align="center">-s</td><td align="center">编译指定的源文件，但不进行汇编</td></tr><tr><td align="center">-c</td><td align="center">编译、汇编指定的源文件，但不进行链接</td></tr><tr><td align="center">-o [file1] [file2] &#x2F; [file2] -o [file1]</td><td align="center">将文件file2编译成可执行文件file1</td></tr><tr><td align="center">-I</td><td align="center">指定 include包含文件的搜索目录</td></tr><tr><td align="center">-g</td><td align="center">在编译的时候，生成调试信息，该程序可以被调试器调试</td></tr><tr><td align="center">-D</td><td align="center">在程序编译的时候，指定一个宏</td></tr><tr><td align="center">-w</td><td align="center">不生成任何警告信息</td></tr></tbody></table><table><thead><tr><th align="center">gcc编译选项</th><th align="center">说明</th></tr></thead><tbody><tr><td align="center">-Wall</td><td align="center">生成所有警告信息</td></tr><tr><td align="center">-On</td><td align="center">n的取值范围：0~3.编译器的优化选项的4个级别，-O0表示没有优化，-O1为缺省值，-O3优化级别最高</td></tr><tr><td align="center">-l</td><td align="center">在程序编译的时候，指定使用的库</td></tr><tr><td align="center">-L</td><td align="center">指定编译时候，搜索的库的路径</td></tr><tr><td align="center">-fPIC&#x2F;fpic</td><td align="center">生成与位置无关的代码</td></tr><tr><td align="center">-shared</td><td align="center">生成共享目标文件，通常用在建立共享库上</td></tr><tr><td align="center">-std</td><td align="center">指定C方言，如：-std&#x3D;c99，gcc默认的方言为 GUN C</td></tr></tbody></table><ul><li><p>gcc的命令</p><ul><li><p>gcc编译格式：gcc xx.c -o 生成的可执行文件名称</p></li><li><p>-E：预编译</p></li><li><p>-S：生成汇编代码</p></li></ul></li><li><p>一般来说，gcc用来编译C语言，g++用来编译C++语言</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>Linux编程</tag>
+      
+      <tag>环境配置</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
