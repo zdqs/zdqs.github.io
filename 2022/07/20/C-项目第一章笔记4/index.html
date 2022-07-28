@@ -16,26 +16,25 @@
   <meta name="author" content="zdq">
   <meta name="keywords" content="">
   
-    <meta name="description" content="C++项目第 1 章：Linux系统编程入门5、makefile1、什么是 Makefile  一个工程中的源文件不计其数，其按照类型、功能、模块放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就像一个 Shell脚本一样，也可以执行操作系统的命令。  Makefi">
+    <meta name="description" content="C++项目第 1 章：Linux系统编程入门5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。 若调用标准C库的IO函数，其实会先去调用Linux下的IO，Linux中的IO函数更加偏底层，低级；标准C库的IO更加高级，效率更高，带有缓冲区。 C语言的I&#x2F;O函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++项目第一章笔记3">
-<meta property="og:url" content="http://example.com/2022/07/19/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B03/index.html">
+<meta property="og:title" content="C++项目第一章笔记4">
+<meta property="og:url" content="http://example.com/2022/07/20/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B04/index.html">
 <meta property="og:site_name" content="zzZdqs">
-<meta property="og:description" content="C++项目第 1 章：Linux系统编程入门5、makefile1、什么是 Makefile  一个工程中的源文件不计其数，其按照类型、功能、模块放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就像一个 Shell脚本一样，也可以执行操作系统的命令。  Makefi">
+<meta property="og:description" content="C++项目第 1 章：Linux系统编程入门5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。 若调用标准C库的IO函数，其实会先去调用Linux下的IO，Linux中的IO函数更加偏底层，低级；标准C库的IO更加高级，效率更高，带有缓冲区。 C语言的I&#x2F;O函数">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/2.jpg">
-<meta property="article:published_time" content="2022-07-19T12:22:03.000Z">
-<meta property="article:modified_time" content="2022-07-19T13:41:54.897Z">
+<meta property="article:published_time" content="2022-07-20T03:47:51.000Z">
+<meta property="article:modified_time" content="2022-07-20T04:12:34.964Z">
 <meta property="article:author" content="zdq">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Linux编程">
-<meta property="article:tag" content="GDB调试">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/img/2.jpg">
   
   
   
-  <title>C++项目第一章笔记3 - zzZdqs</title>
+  <title>C++项目第一章笔记4 - zzZdqs</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -234,7 +233,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="C++项目第一章笔记3"></span>
+            <span id="subtitle" data-typed-text="C++项目第一章笔记4"></span>
           
         </div>
 
@@ -245,8 +244,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-19 20:22" pubdate>
-          2022年7月19日 晚上
+        <time datetime="2022-07-20 11:47" pubdate>
+          2022年7月20日 中午
         </time>
       </span>
     
@@ -257,7 +256,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          289 字
         
       </span>
     
@@ -268,7 +267,7 @@
         
         
         
-          14 分钟
+          3 分钟
         
       </span>
     
@@ -314,132 +313,16 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">C++项目第一章笔记3</h1>
+            <h1 style="display: none">C++项目第一章笔记4</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="C-项目第-1-章：Linux系统编程入门"><a href="#C-项目第-1-章：Linux系统编程入门" class="headerlink" title="C++项目第 1 章：Linux系统编程入门"></a>C++项目第 1 章：Linux系统编程入门</h1><h2 id="5、makefile"><a href="#5、makefile" class="headerlink" title="5、makefile"></a>5、makefile</h2><p><strong>1、什么是 Makefile</strong></p>
-<ul>
-<li><p>一个工程中的源文件不计其数，其按照类型、功能、模块放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 Makefile 文件就像一个 Shell脚本一样，也可以执行操作系统的命令。</p>
-</li>
-<li><p>Makefile 带来的好处就是“<strong>自动化编译</strong>”，一旦写好，只需一个make指令，整个工程完全自动编译，极大提高了软件开发的效率。</p>
-</li>
-</ul>
-<p><strong>2、Makefile的文件命名和规则</strong></p>
-<ul>
-<li><p>文件命名</p>
-<ul>
-<li>makefile 或者 Makefile</li>
-</ul>
-</li>
-<li><p>Makefile 规则</p>
-<ul>
-<li><p>一个 Makefile 文件中可以由一个或者多个规则</p>
-<p>  <img src="https://s2.loli.net/2022/07/19/Hw8GNt4qYBmD3cR.png" srcset="/img/loading.gif" lazyload alt="1.jpg"></p>
-<ul>
-<li><p>目标： 最终要生成的文件(伪目标除外)</p>
-</li>
-<li><p>依赖：生成目标所需要的文件或是目标</p>
-</li>
-<li><p>命令：通过执行命令对依赖操作生成目标(命令前进行Tab缩进)</p>
-</li>
-</ul>
-</li>
-<li><p>Makefile 中的其他规则一般是为第一条规则服务。</p>
-<ul>
-<li><p>若 Makefile中的第一条规则中的先决条件不存在，它会顺序往下找其他规则，是否能够生成第一条规则所需要的依赖。</p>
-</li>
-<li><p>使用 Makefile 编译会帮助我们自动检查文件是否发生修改，再决定是否需要编译。会比较目标与依赖文件的时间</p>
-<ul>
-<li><p>如果依赖的时间比目标时间晚，需要重新生成目标</p>
-</li>
-<li><p>如果依赖时间比目标时间早，目标不需要更新，对应规则中的命令不需要被执行。</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>例如：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">app:sub<span class="hljs-selector-class">.c</span> add<span class="hljs-selector-class">.c</span> mult<span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span>    <br> <br>	gcc sub<span class="hljs-selector-class">.c</span> add<span class="hljs-selector-class">.c</span> mult<span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">div</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> -o app<br><br></code></pre></td></tr></table></figure>
-
-<p><strong>3、Makefile 的变量</strong></p>
-<ul>
-<li><p>自定义变量</p>
-<ul>
-<li>变量名&#x3D;变量值   var &#x3D; hello   $(var)</li>
-</ul>
-</li>
-<li><p>预定义变量</p>
-<ul>
-<li><p>AR：归档维护程序的名称，默认值为 ar</p>
-</li>
-<li><p>CC：C编译器的名称，默认值为cc</p>
-</li>
-<li><p>CXX：C++编译器的名称，默认值为 g++</p>
-</li>
-<li><p>$@：目标的完成名称</p>
-</li>
-<li><p>$&lt; ：第一个依赖文件的名称</p>
-</li>
-<li><p>$&lt; ：所有的依赖文件</p>
-</li>
-</ul>
-</li>
-<li><p>获取变量的值</p>
-<ul>
-<li>$（变量名）</li>
-</ul>
-</li>
-</ul>
-<p>例如：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus">app:<span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.c</span><br>	<br>	gcc -c <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.c</span><br><br>#自动变量只能在规则的命令中使用<br><br>app:<span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.c</span> <span class="hljs-selector-tag">b</span><span class="hljs-selector-class">.c</span><br>	$(CC) -c $^ -o $@<br></code></pre></td></tr></table></figure>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#模式匹配例子</span><br><br><span class="hljs-comment">#定义变量</span><br>src=sub.o add.o mult.o div.o main.o<br>target=app<br><span class="hljs-variable">$(target)</span>:<span class="hljs-variable">$(src)</span><br>	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(src)</span> -o <span class="hljs-variable">$(target)</span><br><br>%.o%.c<br>	<span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="6、GDB调试"><a href="#6、GDB调试" class="headerlink" title="6、GDB调试"></a>6、GDB调试</h2><p><strong>1、什么是GDB</strong></p>
-<ul>
-<li><p>GDB是由 GNU 软件系统社区提供的调试工具，同 GCC 配套组成了一套完整的开发环境， GDB 是 Linux 和许多类 Unix 系统的标准开发环境。</p>
-</li>
-<li><p>一般来说，GDB主要由四个方面的功能：</p>
-<ul>
-<li><p>启动程序，可以按照自定义的要求随心所欲的运行程序</p>
-</li>
-<li><p>可让被调试的程序在所指定的调置的断点处停住（断点可以是条件表达式）</p>
-</li>
-<li><p>当程序被停住时，可以检查此时程序中所发生的事</p>
-</li>
-<li><p>可以改变程序，将一个BUG产生的影响修正从而测试其他BUG</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>gcc -g -Wall program.c -o program</strong></p>
-<ul>
-<li><p>-g 选项的作用是在可执行文件中加入源代码的信息，比如可执行文件中第几条机器指令对应源代码的第几行，但并不是把整个源文件嵌入到可执行文件中，所以在调试时必须保证gdb 能找到源文件</p>
-<ul>
-<li><p>list指令，查看代码。在gdb打开的文件中，用list查看代码。可以指定行数，指定函数名，指定文件名等操作。</p>
-</li>
-<li><p>break指令，设置断点。break 行号&#x2F;函数名&#x2F;文件名，行号&#x2F;文件名，函数名</p>
-<ul>
-<li>还可以设置条件断点：比如在for循环中，设置断点停在循环变量等于某个值时。</li>
-</ul>
-</li>
-<li><p>info指令，查看断点。</p>
-</li>
-<li><p>delete指令，删除断点。删除的是断点编号。</p>
-</li>
-<li><p>disable指令，失效断点。失效的是断点编号。</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>指令合集：</strong></p>
-<p><img src="https://s2.loli.net/2022/07/19/4aGFKqmOW7CVP9d.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://s2.loli.net/2022/07/19/3w5mUSAoXLKjOpG.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://s2.loli.net/2022/07/19/FrA3SViI1e9Yyqo.png" srcset="/img/loading.gif" lazyload></p>
+                <h1 id="C-项目第-1-章：Linux系统编程入门"><a href="#C-项目第-1-章：Linux系统编程入门" class="headerlink" title="C++项目第 1 章：Linux系统编程入门"></a>C++项目第 1 章：Linux系统编程入门</h1><h2 id="5、标准C-I-x2F-O-和-Linux-系统-I-x2F-O-函数的比较"><a href="#5、标准C-I-x2F-O-和-Linux-系统-I-x2F-O-函数的比较" class="headerlink" title="5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较"></a>5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较</h2><p>C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。</p>
+<p>若调用标准C库的IO函数，其实会先去调用Linux下的IO，Linux中的IO函数更加偏底层，低级；标准C库的IO更加高级，效率更高，带有缓冲区。</p>
+<p>C语言的I&#x2F;O函数是对Linux的I&#x2F;O进行了一次包装，最大的差异，在于C语言设置了一个缓冲区，每次调用函数写数据时，都是先写入到缓冲区中，只有缓冲区满或者强制刷新缓冲区时，才会把数据写入到磁盘&#x2F;显示器等</p>
+<p><img src="https://s2.loli.net/2022/07/20/N3smMGey8kqo7EC.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://s2.loli.net/2022/07/20/bg2SP7nmxtKRlJy.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -477,8 +360,6 @@
       
         <a href="/tags/Linux%E7%BC%96%E7%A8%8B/">#Linux编程</a>
       
-        <a href="/tags/GDB%E8%B0%83%E8%AF%95/">#GDB调试</a>
-      
     </div>
   
 </div>
@@ -489,8 +370,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>C++项目第一章笔记3</div>
-      <div>http://example.com/2022/07/19/C-项目第一章笔记3/</div>
+      <div>C++项目第一章笔记4</div>
+      <div>http://example.com/2022/07/20/C-项目第一章笔记4/</div>
     </div>
     <div class="license-meta">
       
@@ -502,7 +383,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月19日</div>
+          <div>2022年7月20日</div>
         </div>
       
       
@@ -532,18 +413,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/20/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B04/" title="C++项目第一章笔记4">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++项目第一章笔记4</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/18/win10%E7%B3%BB%E7%BB%9F%E4%B8%8BDetectron2%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA%E7%9A%84%E7%AC%94%E8%AE%B0/" title="win10系统下Detectron2框架搭建的笔记">
-                        <span class="hidden-mobile">win10系统下Detectron2框架搭建的笔记</span>
+                      <a href="/2022/07/19/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B03/" title="C++项目第一章笔记3">
+                        <span class="hidden-mobile">C++项目第一章笔记3</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
