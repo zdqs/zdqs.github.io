@@ -16,16 +16,16 @@
   <meta name="author" content="zdq">
   <meta name="keywords" content="">
   
-    <meta name="description" content="C++项目第 1 章：Linux系统编程入门5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。 若调用标准C库的IO函数，其实会先去调用Linux下的IO，Linux中的IO函数更加偏底层，低级；标准C库的IO更加高级，效率更高，带有缓冲区。 C语言的I&#x2F;O函数">
+    <meta name="description" content="C++项目第 1 章：Linux系统编程入门zdqassssssss5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。 若调用标准C库的IO函数，其实会先去调用Linux下的IO，Linux中的IO函数更加偏底层，低级；标准C库的IO更加高级，效率更高，带有缓冲区。 C语">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++项目第一章笔记4">
 <meta property="og:url" content="http://example.com/2022/07/20/C-%E9%A1%B9%E7%9B%AE%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%94%E8%AE%B04/index.html">
 <meta property="og:site_name" content="zzZdqs">
-<meta property="og:description" content="C++项目第 1 章：Linux系统编程入门5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。 若调用标准C库的IO函数，其实会先去调用Linux下的IO，Linux中的IO函数更加偏底层，低级；标准C库的IO更加高级，效率更高，带有缓冲区。 C语言的I&#x2F;O函数">
+<meta property="og:description" content="C++项目第 1 章：Linux系统编程入门zdqassssssss5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。 若调用标准C库的IO函数，其实会先去调用Linux下的IO，Linux中的IO函数更加偏底层，低级；标准C库的IO更加高级，效率更高，带有缓冲区。 C语">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/2.jpg">
 <meta property="article:published_time" content="2022-07-20T03:47:51.000Z">
-<meta property="article:modified_time" content="2022-07-20T04:12:36.000Z">
+<meta property="article:modified_time" content="2022-07-28T06:54:54.833Z">
 <meta property="article:author" content="zdq">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Linux编程">
@@ -256,7 +256,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          289 字
+          301 字
         
       </span>
     
@@ -318,7 +318,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="C-项目第-1-章：Linux系统编程入门"><a href="#C-项目第-1-章：Linux系统编程入门" class="headerlink" title="C++项目第 1 章：Linux系统编程入门"></a>C++项目第 1 章：Linux系统编程入门</h1><h2 id="5、标准C-I-x2F-O-和-Linux-系统-I-x2F-O-函数的比较"><a href="#5、标准C-I-x2F-O-和-Linux-系统-I-x2F-O-函数的比较" class="headerlink" title="5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较"></a>5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较</h2><p>C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。</p>
+                <h1 id="C-项目第-1-章：Linux系统编程入门zdqassssssss"><a href="#C-项目第-1-章：Linux系统编程入门zdqassssssss" class="headerlink" title="C++项目第 1 章：Linux系统编程入门zdqassssssss"></a>C++项目第 1 章：Linux系统编程入门zdqassssssss</h1><h2 id="5、标准C-I-x2F-O-和-Linux-系统-I-x2F-O-函数的比较"><a href="#5、标准C-I-x2F-O-和-Linux-系统-I-x2F-O-函数的比较" class="headerlink" title="5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较"></a>5、标准C I&#x2F;O 和 Linux 系统 I&#x2F;O 函数的比较</h2><p>C语言的 I&#x2F;O 和 LInux中的 I&#x2F;O函数之间是一种包含与被包含的关系。</p>
 <p>若调用标准C库的IO函数，其实会先去调用Linux下的IO，Linux中的IO函数更加偏底层，低级；标准C库的IO更加高级，效率更高，带有缓冲区。</p>
 <p>C语言的I&#x2F;O函数是对Linux的I&#x2F;O进行了一次包装，最大的差异，在于C语言设置了一个缓冲区，每次调用函数写数据时，都是先写入到缓冲区中，只有缓冲区满或者强制刷新缓冲区时，才会把数据写入到磁盘&#x2F;显示器等</p>
 <p><img src="https://s2.loli.net/2022/07/20/N3smMGey8kqo7EC.png" srcset="/img/loading.gif" lazyload></p>
